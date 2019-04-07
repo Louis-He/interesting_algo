@@ -6,8 +6,8 @@ def calFitness(array):
     allCount = 0
 
     count = 0
-    for i in range(size - 1):
-        for j in range(i + 1, size -1):
+    for i in range(size):
+        for j in range(i + 1, size):
             if array[j] > array[i]:
                 count += 1
             allCount += 1
@@ -141,7 +141,7 @@ def GAsorting(arr):
             isDone = True
         else:
             print("#", iterateTimes, ": ", geneticPool[maxIdx].array)
-            while(len(geneticPool) > 20):
+            while(len(geneticPool) > 5):
                 geneticPool.pop(minIdx)
                 minFitness = +2.0
                 for i in range(len(geneticPool)):
@@ -154,7 +154,15 @@ def GAsorting(arr):
 
     plt.plot(fitnessTrend)
     plt.show()
+    return iterateTimes
 
 
 a = [6, 4, 5, 8, 2, 0, 3, 1, 7, 9, 16, 12, 13, 100, 28, 40]
+
 GAsorting(a)
+
+# sumIterateTimes = 0
+# for i in range(100):
+#     sumIterateTimes += GAsorting(a)
+#
+# print("Average Times: ", sumIterateTimes / 100)
