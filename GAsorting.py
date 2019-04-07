@@ -1,4 +1,5 @@
 import random
+import numpy as np
 import matplotlib.pyplot as plt
 
 def calFitness(array):
@@ -156,8 +157,9 @@ def GAsorting(arr):
     plt.show()
     return iterateTimes
 
-
-a = [6, 4, 5, 8, 2, 0, 3, 1, 7, 9, 16, 12, 13, 100, 28, 40]
+arr = np.arange(20)
+np.random.shuffle(arr)
+a = arr
 
 GAsorting(a)
 
