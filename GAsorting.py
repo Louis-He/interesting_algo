@@ -138,11 +138,11 @@ def GAsorting(arr):
                 minIdx = i
 
         if maxFitness == 1:
-            print("Total take ", iterateTimes, " times: ", geneticPool[maxIdx].array)
+            print("GA Total take ", iterateTimes, " times: ", geneticPool[maxIdx].array)
             isDone = True
         else:
-            print("#", iterateTimes, ": ", geneticPool[maxIdx].array)
-            while(len(geneticPool) > 5):
+            #print("#", iterateTimes, ": ", geneticPool[maxIdx].array)
+            while(len(geneticPool) > 10):
                 geneticPool.pop(minIdx)
                 minFitness = +2.0
                 for i in range(len(geneticPool)):
@@ -153,15 +153,44 @@ def GAsorting(arr):
         iterateTimes += 1
         fitnessTrend.append(maxFitness)
 
-    plt.plot(fitnessTrend)
-    plt.show()
-    return iterateTimes
+    return fitnessTrend
 
-arr = np.arange(20)
+# bubble
+def bubbleSort(arr):
+    fitnessArr = []
+    n = len(arr)
+    count = 0
+
+    # Traverse through all array elements
+    for i in range(n):
+        # Last i elements are already in place
+        for j in range(0, n - i - 1):
+            # traverse the array from 0 to n-i-1
+            # Swap if the element found is greater
+            # than the next element
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+            tmpFitness = calFitness(arr)
+            fitnessArr.append(tmpFitness)
+            count += 1
+
+    print("Bubble Total take ", count, " times: ", arr)
+    return fitnessArr
+
+arr = np.arange(30)
 np.random.shuffle(arr)
-a = arr
+a = list(arr)
 
-GAsorting(a)
+b = a.copy()
+GAfit = GAsorting(b)
+
+b = a.copy()
+bubblefit = bubbleSort(b)
+
+plt.plot(GAfit)
+plt.plot(bubblefit)
+plt.show()
 
 # sumIterateTimes = 0
 # for i in range(100):
