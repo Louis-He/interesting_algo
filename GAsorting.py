@@ -1,14 +1,18 @@
 import random
+import matplotlib.pyplot as plt
 
 def calFitness(array):
     size = len(array)
+    allCount = 0
 
     count = 0
     for i in range(size - 1):
-        if array[i + 1] > array[i]:
-            count += 1
+        for j in range(i + 1, size -1):
+            if array[j] > array[i]:
+                count += 1
+            allCount += 1
 
-    fitneess = count / (size - 1)
+    fitneess = count / allCount
     return fitneess
 
 # swap random two item in the list
@@ -68,6 +72,7 @@ def crossOver(chromosome1, chromosome2):
     return child
 
 def GAsorting(arr):
+    fitnessTrend = []
     geneticPool = []
 
     # generate two parents
@@ -145,6 +150,11 @@ def GAsorting(arr):
                         minIdx = i
 
         iterateTimes += 1
+        fitnessTrend.append(maxFitness)
 
-a = [6, 4, 5, 8, 2, 0, 3, 1, 7, 9]
+    plt.plot(fitnessTrend)
+    plt.show()
+
+
+a = [6, 4, 5, 8, 2, 0, 3, 1, 7, 9, 16, 12, 13, 100, 28, 40]
 GAsorting(a)
